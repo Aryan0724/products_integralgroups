@@ -1,62 +1,76 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-export const MockDashboard = ({ className }: { className?: string }) => (
-  <div className={cn("w-full h-full bg-[#0a0a0a] rounded-xl border border-white/5 overflow-hidden flex flex-col", className)}>
-    <div className="h-10 border-b border-white/5 px-4 flex items-center justify-between bg-white/[0.02]">
-      <div className="flex gap-1.5">
-        <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
-        <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
-        <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
-      </div>
-      <div className="w-32 h-2 bg-white/5 rounded-full" />
-      <div className="w-4 h-4 rounded bg-white/5" />
-    </div>
-    <div className="flex-1 p-6 flex gap-6">
-      <div className="w-40 flex flex-col gap-4">
-        {[1, 2, 3, 4].map(i => (
-          <div key={i} className="h-8 rounded bg-white/[0.03] border border-white/5" />
-        ))}
-        <div className="mt-auto h-24 rounded bg-gradient-to-b from-blue-500/10 to-transparent border border-blue-500/10" />
-      </div>
-      <div className="flex-1 flex flex-col gap-6">
-        <div className="grid grid-cols-3 gap-4">
-          {[1, 2, 3].map(i => (
-            <div key={i} className="h-24 rounded-xl bg-white/[0.02] border border-white/5 p-4 flex flex-col justify-between">
-              <div className="w-12 h-2 bg-white/10 rounded-full" />
-              <div className="w-16 h-4 bg-white/20 rounded-full" />
-            </div>
-          ))}
+export const MockDashboard = ({ className }: { className?: string }) => {
+  const [heights, setHeights] = useState<number[]>([]);
+
+  useEffect(() => {
+    setHeights([...Array(20)].map(() => Math.random() * 100));
+  }, []);
+
+  return (
+    <div className={cn("w-full h-full bg-[#0a0a0a] rounded-xl border border-white/5 overflow-hidden flex flex-col", className)}>
+      <div className="h-10 border-b border-white/5 px-4 flex items-center justify-between bg-white/[0.02]">
+        <div className="flex gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
+          <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
+          <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
         </div>
-        <div className="flex-1 rounded-xl bg-white/[0.02] border border-white/5 p-6 relative overflow-hidden">
-          <div className="flex justify-between mb-8">
-            <div className="space-y-2">
-              <div className="w-24 h-2 bg-white/20 rounded-full" />
-              <div className="w-32 h-1.5 bg-white/5 rounded-full" />
-            </div>
-            <div className="flex gap-2">
-              <div className="w-16 h-6 rounded bg-white/5 border border-white/10" />
-              <div className="w-16 h-6 rounded bg-blue-500/20 border border-blue-500/20" />
-            </div>
-          </div>
-          {/* Chart Simulation */}
-          <div className="absolute bottom-0 left-0 right-0 h-32 flex items-end gap-1 px-6">
-            {[...Array(20)].map((_, i) => (
-              <div 
-                key={i} 
-                className="flex-1 bg-blue-500/20 rounded-t-sm transition-all duration-1000"
-                style={{ height: `${Math.random() * 100}%` }}
-              />
+        <div className="w-32 h-2 bg-white/5 rounded-full" />
+        <div className="w-4 h-4 rounded bg-white/5" />
+      </div>
+      <div className="flex-1 p-6 flex gap-6">
+        <div className="w-40 flex flex-col gap-4">
+          {[1, 2, 3, 4].map(i => (
+            <div key={i} className="h-8 rounded bg-white/[0.03] border border-white/5" />
+          ))}
+          <div className="mt-auto h-24 rounded bg-gradient-to-b from-blue-500/10 to-transparent border border-blue-500/10" />
+        </div>
+        <div className="flex-1 flex flex-col gap-6">
+          <div className="grid grid-cols-3 gap-4">
+            {[1, 2, 3].map(i => (
+              <div key={i} className="h-24 rounded-xl bg-white/[0.02] border border-white/5 p-4 flex flex-col justify-between">
+                <div className="w-12 h-2 bg-white/10 rounded-full" />
+                <div className="w-16 h-4 bg-white/20 rounded-full" />
+              </div>
             ))}
           </div>
+          <div className="flex-1 rounded-xl bg-white/[0.02] border border-white/5 p-6 relative overflow-hidden">
+            <div className="flex justify-between mb-8">
+              <div className="space-y-2">
+                <div className="w-24 h-2 bg-white/20 rounded-full" />
+                <div className="w-32 h-1.5 bg-white/5 rounded-full" />
+              </div>
+              <div className="flex gap-2">
+                <div className="w-16 h-6 rounded bg-white/5 border border-white/10" />
+                <div className="w-16 h-6 rounded bg-blue-500/20 border border-blue-500/20" />
+              </div>
+            </div>
+            {/* Chart Simulation */}
+            <div className="absolute bottom-0 left-0 right-0 h-32 flex items-end gap-1 px-6">
+              {heights.length > 0 ? (
+                heights.map((h, i) => (
+                  <div 
+                    key={i} 
+                    className="flex-1 bg-blue-500/20 rounded-t-sm transition-all duration-1000"
+                    style={{ height: `${h}%` }}
+                  />
+                ))
+              ) : (
+                [...Array(20)].map((_, i) => (
+                  <div key={i} className="flex-1 bg-blue-500/5 rounded-t-sm" style={{ height: '20%' }} />
+                ))
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export const MockFlow = ({ className }: { className?: string }) => (
   <div className={cn("w-full h-full bg-[#080808] rounded-xl border border-white/5 p-8 flex flex-col gap-8 items-center justify-center", className)}>

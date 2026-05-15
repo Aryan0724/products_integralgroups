@@ -169,8 +169,8 @@ function OrbitalIcon({ icon, index, total, springX, springY }: { icon: any; inde
     >
       <motion.div
         style={{
-          x: Math.cos(angle) * radius,
-          y: Math.sin(angle) * radius,
+          x: Math.round(Math.cos(angle) * radius),
+          y: Math.round(Math.sin(angle) * radius),
           translateX: useTransform(springX, (v: number) => v * (1.2 + index * 0.1)),
           translateY: useTransform(springY, (v: number) => v * (1.2 + index * 0.1)),
         }}
