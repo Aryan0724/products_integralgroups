@@ -40,56 +40,61 @@ export function Navbar() {
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       className="fixed top-8 left-0 right-0 z-[100] flex items-center justify-center px-6"
     >
-      <div className="glass-dark border border-white/10 rounded-full px-8 py-4 flex items-center justify-between w-full max-w-[1200px] shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-3xl">
+      <div className="max-w-[1400px] mx-auto h-20 px-8 flex items-center justify-between relative w-full">
+        {/* Glass Background Refinement */}
+        <div className="absolute inset-0 bg-[#050505]/40 backdrop-blur-2xl border border-white/5 rounded-full -z-10" />
+        
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform duration-500 shadow-xl">
-            <div className="w-3 h-3 bg-black rounded-sm" />
+          <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center group-hover:scale-105 transition-transform duration-500 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+            <span className="text-black font-black text-xl tracking-tighter">I</span>
           </div>
-          <span className="font-bold text-sm uppercase tracking-[0.4em] font-sans text-white">
-            Integral
-          </span>
+          <div className="flex flex-col">
+            <span className="text-sm font-bold tracking-[0.2em] text-white uppercase leading-none">Integral</span>
+            <span className="text-[9px] font-bold tracking-[0.4em] text-white/30 uppercase leading-none mt-1">Studio</span>
+          </div>
         </Link>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-12">
-          <div className="flex items-center gap-10">
-            {navItems.map((item) => (
-              <Magnetic key={item.name}>
-                <Link
-                  href={item.href}
-                  className={cn(
-                    "text-[10px] font-bold uppercase tracking-[0.3em] transition-all hover:text-white relative py-1",
-                    pathname === item.href ? "text-white" : "text-white/30"
-                  )}
-                >
-                  {item.name}
-                  {pathname === item.href && (
-                    <motion.div
-                      layoutId="nav-dot"
-                      className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-blue-500 rounded-full shadow-[0_0_15px_rgba(59,130,246,0.8)]"
-                    />
-                  )}
-                </Link>
-              </Magnetic>
-            ))}
-          </div>
-          <div className="h-4 w-[1px] bg-white/10 mx-2" />
+          {navItems.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/40 hover:text-white transition-all duration-500 relative group"
+            >
+              {link.name}
+              <span className="absolute -bottom-1 left-0 w-0 h-px bg-white/40 group-hover:w-full transition-all duration-500" />
+            </Link>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-6">
           <Magnetic>
             <Link href="/contact">
-              <Button variant="ghost" className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/50 hover:text-white px-0 h-auto hover:bg-transparent">
-                Contact
+              <Button className="hidden md:flex rounded-full bg-white text-black hover:scale-105 transition-transform duration-500 px-8 h-12 text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl">
+                Start A Project
               </Button>
             </Link>
           </Magnetic>
-        </div>
 
-        {/* Mobile Nav Toggle */}
-        <button
-          className="md:hidden text-white w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="w-10 h-10 flex flex-col items-center justify-center gap-1.5 md:hidden"
+          >
+            <motion.div
+              animate={isOpen ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }}
+              className="w-5 h-px bg-white"
+            />
+            <motion.div
+              animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
+              className="w-5 h-px bg-white"
+            />
+            <motion.div
+              animate={isOpen ? { rotate: -45, y: -4 } : { rotate: 0, y: 0 }}
+              className="w-5 h-px bg-white"
+            />
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}

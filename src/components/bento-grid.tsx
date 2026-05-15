@@ -1,76 +1,78 @@
 "use client";
 
-import React, { useRef } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { Cpu, Zap, BarChart3, Database, Layers, ArrowRight } from "lucide-react";
+import { MockDashboard, MockFlow, MockCode } from "./mock-ui";
 
 const items = [
   {
     title: "SaaS Platforms",
     description: "Scalable software products built for startups, creators, businesses, and operational systems.",
-    icon: Layers,
+    component: MockDashboard,
     className: "md:col-span-2 md:row-span-2",
-    color: "from-blue-500/20 to-transparent",
+    color: "from-blue-500/10 to-transparent",
   },
   {
     title: "AI Products",
-    description: "Machine learning systems and AI-powered products designed to automate workflows.",
-    icon: Cpu,
+    description: "Machine learning systems and AI-powered products.",
+    component: MockFlow,
     className: "md:col-span-1 md:row-span-1",
-    color: "from-purple-500/20 to-transparent",
+    color: "from-purple-500/10 to-transparent",
   },
   {
     title: "Automation Systems",
-    description: "Workflow automation platforms that streamline execution and operational efficiency.",
-    icon: Zap,
+    description: "Workflow automation and operational efficiency.",
+    component: MockCode,
     className: "md:col-span-1 md:row-span-1",
-    color: "from-amber-500/20 to-transparent",
+    color: "from-amber-500/10 to-transparent",
   },
   {
     title: "Internal Tools",
-    description: "Purpose-built software systems designed to support the Integral ecosystem.",
-    icon: Database,
+    description: "Purpose-built software systems designed for efficiency.",
+    component: MockDashboard,
     className: "md:col-span-1 md:row-span-2",
-    color: "from-emerald-500/20 to-transparent",
+    color: "from-emerald-500/10 to-transparent",
   },
 ];
 
 export function BentoGrid() {
   return (
-    <section className="py-48 px-6 bg-background relative overflow-hidden">
+    <section className="py-64 px-6 bg-[#050505] relative overflow-hidden">
       <div className="max-w-[1400px] mx-auto">
-        <div className="mb-32">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/40 mb-4"
-          >
-            Capabilities
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-6xl font-bold tracking-tight text-white max-w-3xl leading-[1.1]"
-          >
-            Products Built For <br />
-            <span className="text-white/40">Modern Systems.</span>
-          </motion.h2>
+        <div className="mb-40 flex flex-col md:flex-row md:items-end justify-between gap-12">
+          <div className="max-w-3xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-[10px] uppercase tracking-[0.4em] font-bold text-white/30 mb-6"
+            >
+              Expertise
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-5xl md:text-7xl font-bold tracking-tighter text-white leading-[0.9]"
+            >
+              Products Built For <br />
+              <span className="text-white/40">Modern Systems.</span>
+            </motion.h2>
+          </div>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-white/40 text-lg md:text-xl font-medium mt-8 max-w-2xl leading-relaxed"
+            className="text-white/40 text-xl font-medium max-w-lg leading-relaxed balance-text"
           >
-            From internal operational tools to scalable SaaS platforms, Integral Studio develops software systems focused on usability, performance, and long-term scalability.
+            From internal operational tools to scalable SaaS platforms, Integral Studio develops software systems focused on usability and scalability.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {items.map((item, i) => (
             <motion.div
               key={i}
@@ -79,38 +81,28 @@ export function BentoGrid() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               className={cn(
-                "group relative overflow-hidden rounded-[2.5rem] glass-card p-12 flex flex-col justify-between min-h-[350px] hover:border-white/20",
+                "group relative rounded-[2.5rem] overflow-hidden glass-dark border border-white/5 hover:border-white/20 transition-all duration-700",
                 item.className
               )}
             >
-              {/* Background Glow */}
-              <div className={cn("absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-1000 blur-3xl", item.color)} />
+              <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-20 transition-opacity duration-1000 pointer-events-none" />
               
-              <div className="relative z-10">
-                <div className="w-14 h-14 rounded-2xl glass-dark flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-700 border border-white/10">
-                  <item.icon className="w-6 h-6 text-white" />
+              <div className="p-10 h-full flex flex-col">
+                <div className="mb-8">
+                  <h3 className="text-2xl font-bold text-white mb-4 tracking-tight">{item.title}</h3>
+                  <p className="text-white/40 text-sm leading-relaxed max-w-xs">{item.description}</p>
                 </div>
-                <h3 className="text-3xl font-bold text-white mb-4 tracking-tighter">{item.title}</h3>
-                <p className="text-white/40 text-sm leading-relaxed max-w-[220px]">
-                  {item.description}
-                </p>
-              </div>
 
-              <div className="relative z-10 mt-12">
-                <div className="w-full h-[1px] bg-white/5 mb-8" />
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-                    <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/30">System Ready</span>
-                  </div>
-                  <div className="w-8 h-8 rounded-full glass border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-500">
-                    <ArrowRight className="w-3 h-3" />
+                <div className="flex-1 min-h-[300px] relative mt-auto translate-y-10 group-hover:translate-y-0 transition-transform duration-1000">
+                  <div className={cn(
+                    "absolute -inset-10 bg-gradient-to-br blur-[80px] opacity-10 transition-opacity duration-1000",
+                    item.color
+                  )} />
+                  <div className="relative w-full h-full glass-dark border border-white/10 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-xl">
+                    <item.component className="scale-90 group-hover:scale-95 transition-transform duration-1000" />
                   </div>
                 </div>
               </div>
-
-              {/* Shine Effect */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
             </motion.div>
           ))}
         </div>

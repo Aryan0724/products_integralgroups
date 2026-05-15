@@ -5,51 +5,48 @@ import { motion } from "framer-motion";
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-48 px-6 bg-background relative overflow-hidden">
+    <section id="about" className="py-96 px-6 bg-[#050505] relative overflow-hidden">
       <div className="max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 items-start">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="sticky top-48"
+            className="lg:col-span-5 sticky top-48"
           >
-            <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/40 mb-4">
-              Our Identity
+            <div className="text-[10px] uppercase tracking-[0.6em] font-bold text-white/20 mb-8">
+              The Studio
             </div>
-            <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white leading-[1.1]">
-              A Modern SaaS <br />
-              <span className="text-white/40">Product Studio.</span>
+            <h2 className="text-6xl md:text-8xl font-bold tracking-tighter text-white leading-[0.8] mb-12">
+              Architecting <br />
+              <span className="text-white/20 italic">Digital Value.</span>
             </h2>
           </motion.div>
-
+          
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="space-y-12"
+            className="lg:col-span-7 space-y-20"
           >
-            <div className="text-xl md:text-2xl text-white/60 leading-relaxed space-y-8 font-medium">
+            <div className="text-2xl md:text-4xl text-white/50 leading-[1.3] space-y-12 font-medium tracking-tight">
               <p>
-                Integral Studio is the product and SaaS division of Integral Group focused on building scalable digital products, modern software systems, automation infrastructure, and AI-powered platforms.
+                Integral Studio is the product division of Integral Group focused on building scalable software systems, modern software systems, and AI-powered platforms.
               </p>
               <p>
-                We combine product thinking, engineering, frontend systems, and operational scalability to create software built for modern businesses and future-focused ventures.
-              </p>
-              <p>
-                Instead of building generic digital products, our focus is on creating usable, scalable, and maintainable systems with modern engineering standards and premium user experience.
+                We combine product thinking, engineering, and operational scalability to create software built for modern businesses and future-focused ventures.
               </p>
             </div>
             
-            <div className="grid grid-cols-2 gap-8 pt-8 border-t border-white/5">
+            <div className="grid grid-cols-2 gap-16 pt-20 border-t border-white/5">
               <div>
-                <div className="text-4xl font-bold text-white mb-2">100%</div>
-                <div className="text-[10px] uppercase tracking-widest text-white/30 font-bold">Engineering Quality</div>
+                <div className="text-5xl font-bold text-white mb-4 tracking-tighter">100%</div>
+                <div className="text-[10px] uppercase tracking-[0.4em] text-white/20 font-bold">Engineering Quality</div>
               </div>
               <div>
-                <div className="text-4xl font-bold text-white mb-2">SaaS</div>
-                <div className="text-[10px] uppercase tracking-widest text-white/30 font-bold">Focused Architecture</div>
+                <div className="text-5xl font-bold text-white mb-4 tracking-tighter">SaaS</div>
+                <div className="text-[10px] uppercase tracking-[0.4em] text-white/20 font-bold">Focus</div>
               </div>
             </div>
           </motion.div>
