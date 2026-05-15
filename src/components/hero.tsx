@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence, type MotionValue } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Cpu, Layers, Zap, Database, Shield, TrendingUp, Sparkles, Globe, Terminal } from "lucide-react";
@@ -142,9 +143,11 @@ export function Hero() {
               </Button>
             </Magnetic>
             <Magnetic>
-              <Button size="lg" variant="outline" className="rounded-full px-20 h-24 text-xs font-bold uppercase tracking-[0.4em] text-white border-white/10 hover:bg-white/5 hover:border-white/20 flex items-center gap-4 group transition-all duration-500">
-                Start A Project <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-500" />
-              </Button>
+              <Link href="/contact">
+                <Button size="lg" variant="outline" className="rounded-full px-20 h-24 text-xs font-bold uppercase tracking-[0.4em] text-white border-white/10 hover:bg-white/5 hover:border-white/20 flex items-center gap-4 group transition-all duration-500">
+                  Start A Project <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-500" />
+                </Button>
+              </Link>
             </Magnetic>
           </div>
         </motion.div>
