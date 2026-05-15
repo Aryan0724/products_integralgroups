@@ -60,6 +60,17 @@ export function GlobalEffects() {
       {/* Interactive Spotlight */}
       <div className="absolute inset-0 spotlight opacity-40" />
 
+      {/* Cursor Glow */}
+      <motion.div
+        style={{
+          x: springX,
+          y: springY,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+        className="fixed w-[600px] h-[600px] bg-blue-500/5 blur-[120px] rounded-full z-50 pointer-events-none opacity-50"
+      />
+
       {/* Noise Texture */}
       <div className="noise-overlay" />
     </div>

@@ -2,7 +2,6 @@ import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
 import { LogoWall } from "@/components/logo-wall";
 import { BentoGrid } from "@/components/bento-grid";
-import { ProductShowcase } from "@/components/product-showcase";
 import { Services } from "@/components/services";
 import { ProcessTimeline } from "@/components/process-timeline";
 import { AboutSection } from "@/components/about-section";
@@ -17,7 +16,6 @@ export default function Home() {
       <Hero />
       <LogoWall />
       <BentoGrid />
-      <ProductShowcase />
       <Services />
       <ProcessTimeline />
       <AboutSection />

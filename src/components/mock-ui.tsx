@@ -107,11 +107,12 @@ export const MockCode = ({ className }: { className?: string }) => (
     </div>
     <div className="space-y-2">
       <div className="flex gap-2"><span className="text-blue-400">const</span> <span className="text-purple-400">deploy</span> = <span className="text-emerald-400">async</span> () ={">"} {"{"}</div>
-      <div className="flex gap-2 pl-4"><span className="text-blue-400">await</span> <span className="text-zinc-400">Integral.</span><span className="text-yellow-400">provision</span>({"{"}</div>
-      <div className="flex gap-2 pl-8"><span className="text-orange-400">cluster:</span> <span className="text-emerald-400">"edge-v2"</span>,</div>
-      <div className="flex gap-2 pl-8"><span className="text-orange-400">scaling:</span> <span className="text-blue-400">true</span></div>
+      <div className="flex gap-2 pl-4"><span className="text-blue-400">await</span> <span className="text-zinc-400">IntegralHQ.</span><span className="text-yellow-400">orchestrate</span>({"{"}</div>
+      <div className="flex gap-2 pl-8"><span className="text-orange-400">system:</span> <span className="text-emerald-400">"edge-compute-v4"</span>,</div>
+      <div className="flex gap-2 pl-8"><span className="text-orange-400">autoscaling:</span> <span className="text-blue-400">true</span>,</div>
+      <div className="flex gap-2 pl-8"><span className="text-orange-400">analytics:</span> <span className="text-purple-400">"AlgoPilot-Native"</span></div>
       <div className="flex gap-2 pl-4">{"})"};</div>
-      <div className="flex gap-2 pl-4"><span className="text-purple-400">return</span> <span className="text-zinc-400">status;</span></div>
+      <div className="flex gap-2 pl-4"><span className="text-purple-400">return</span> <span className="text-zinc-400">deployment.status;</span></div>
       <div className="flex gap-2">{"}"}</div>
     </div>
   </div>

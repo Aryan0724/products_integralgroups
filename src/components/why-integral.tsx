@@ -27,7 +27,7 @@ const reasons = [
 
 export function WhyIntegral() {
   return (
-    <section className="py-64 px-6 bg-black relative overflow-hidden">
+    <section className="py-40 px-6 bg-black relative overflow-hidden">
       {/* Background Exhibit */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-10 blur-3xl pointer-events-none">
         <MockFlow />

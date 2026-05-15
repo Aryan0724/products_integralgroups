@@ -8,7 +8,7 @@ import { MockDashboard } from "./mock-ui";
 
 export function FinalCTA() {
   return (
-    <section className="py-96 px-6 bg-black relative overflow-hidden text-center">
+    <section className="py-48 px-6 bg-black relative overflow-hidden text-center">
       {/* Background Interface Exhibit */}
       <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[600px] rotate-12 blur-2xl">

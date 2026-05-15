@@ -3,39 +3,39 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { Logo } from "./logo";
 
 const footerLinks = [
   {
     title: "Company",
     links: [
       { name: "About", href: "/about" },
-      { name: "Process", href: "/process" },
+      { name: "Processes", href: "/processes" },
+      { name: "Blog", href: "/blog" },
       { name: "Contact", href: "/contact" },
-    ],
-  },
-  {
-    title: "Services",
-    links: [
-      { name: "SaaS Development", href: "/services" },
-      { name: "AI Systems", href: "/services" },
-      { name: "Automation", href: "/services" },
-      { name: "Product Design", href: "/services" },
-    ],
-  },
-  {
-    title: "Products",
-    links: [
-      { name: "Platforms", href: "/products" },
-      { name: "Internal Tools", href: "/products" },
-      { name: "Product Systems", href: "/products" },
     ],
   },
   {
     title: "Ecosystem",
     links: [
-      { name: "Integral Group", href: "https://integral.group" },
-      { name: "Integral Labs", href: "https://integral.labs" },
-      { name: "Integral Media", href: "https://integral.media" },
+      { name: "Integral Groups", href: "/integral-groups" },
+      { name: "Main Portal", href: "https://integralgroups.in" },
+    ],
+  },
+  {
+    title: "Products",
+    links: [
+      { name: "IntegralHQ", href: "/products" },
+      { name: "AlgoPilot", href: "/products" },
+      { name: "ExamPlanner", href: "/products" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { name: "Governance", href: "/legal" },
+      { name: "Privacy", href: "/legal" },
+      { name: "Terms", href: "/legal" },
     ],
   },
 ];
@@ -50,13 +50,7 @@ export function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 mb-40">
           <div className="lg:col-span-4 max-w-sm text-left">
             <Link href="/" className="flex items-center gap-3 group mb-10">
-              <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center group-hover:scale-105 transition-transform duration-500 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
-                <span className="text-black font-black text-xl tracking-tighter">I</span>
-              </div>
-              <div className="flex flex-col text-left">
-                <span className="text-sm font-bold tracking-[0.2em] text-white uppercase leading-none">Integral</span>
-                <span className="text-[9px] font-bold tracking-[0.4em] text-white/30 uppercase leading-none mt-1 text-left">Studio</span>
-              </div>
+              <Logo />
             </Link>
             <p className="text-white/40 text-sm leading-relaxed font-medium text-left">
               Architecting scalable software systems, modern SaaS platforms, and AI-powered products for modern digital infrastructure.

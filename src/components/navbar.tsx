@@ -7,12 +7,15 @@ import { motion, useScroll, AnimatePresence, useMotionValueEvent } from "framer-
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ArrowRight } from "lucide-react";
+import { Logo } from "./logo";
 import { Magnetic } from "./motion/magnetic";
 
 const navItems = [
   { name: "Products", href: "/products" },
-  { name: "Process", href: "/process" },
+  { name: "Processes", href: "/processes" },
   { name: "About", href: "/about" },
+  { name: "Blog", href: "/blog" },
+  { name: "Integral Groups", href: "/integral-groups", isParent: true },
 ];
 
 export function Navbar() {
@@ -45,13 +48,7 @@ export function Navbar() {
         <div className="absolute inset-0 bg-[#050505]/40 backdrop-blur-2xl border border-white/5 rounded-full -z-10" />
         
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center group-hover:scale-105 transition-transform duration-500 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
-            <span className="text-black font-black text-xl tracking-tighter">I</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-sm font-bold tracking-[0.2em] text-white uppercase leading-none">Integral</span>
-            <span className="text-[9px] font-bold tracking-[0.4em] text-white/30 uppercase leading-none mt-1">Studio</span>
-          </div>
+          <Logo />
         </Link>
 
         {/* Desktop Nav */}
@@ -60,10 +57,16 @@ export function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/40 hover:text-white transition-all duration-500 relative group"
+              className={cn(
+                "text-[10px] uppercase tracking-[0.3em] font-bold transition-all duration-500 relative group",
+                link.isParent ? "text-blue-500 hover:text-blue-400" : "text-white/40 hover:text-white"
+              )}
             >
               {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-white/40 group-hover:w-full transition-all duration-500" />
+              <span className={cn(
+                "absolute -bottom-1 left-0 w-0 h-px transition-all duration-500 group-hover:w-full",
+                link.isParent ? "bg-blue-500" : "bg-white/40"
+              )} />
             </Link>
           ))}
         </div>

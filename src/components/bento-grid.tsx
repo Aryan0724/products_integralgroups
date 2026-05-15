@@ -1,112 +1,215 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef, useState } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { MockDashboard, MockFlow, MockCode } from "./mock-ui";
+import { LibrarySection } from "./library-section";
+import { ArrowRight, Cpu, Layers, Shield, Zap } from "lucide-react";
 
-const items = [
+const products = [
   {
-    title: "SaaS Platforms",
-    description: "Scalable software products built for startups, creators, businesses, and operational systems.",
-    component: MockDashboard,
+    title: "IntegralHQ",
+    description: "The unified operational workspace for modern business orchestration, CRM, and automation. Engineered for high-scale enterprise operations.",
+    image: "/integralhq.png",
     className: "md:col-span-2 md:row-span-2",
-    color: "from-blue-500/10 to-transparent",
+    color: "from-blue-500/30 to-transparent",
+    glowColor: "rgba(59, 130, 246, 0.5)",
+    specs: ["Sub-100ms Latency", "Military-Grade Security"],
+    category: "Operations",
+    icon: Layers
   },
   {
-    title: "AI Products",
-    description: "Machine learning systems and AI-powered products.",
-    component: MockFlow,
+    title: "AlgoPilot",
+    description: "AI-powered intelligence for creators. Predictive hooks and engagement signals.",
+    image: "/algopilot.png",
     className: "md:col-span-1 md:row-span-1",
-    color: "from-purple-500/10 to-transparent",
+    color: "from-purple-500/30 to-transparent",
+    glowColor: "rgba(139, 92, 246, 0.5)",
+    specs: ["AI Analytics"],
+    category: "Intelligence",
+    icon: Cpu
   },
   {
-    title: "Automation Systems",
-    description: "Workflow automation and operational efficiency.",
-    component: MockCode,
+    title: "ExamPlanner",
+    description: "Institutional management and resource mapping infrastructure.",
+    image: "/examplanner.png",
     className: "md:col-span-1 md:row-span-1",
-    color: "from-amber-500/10 to-transparent",
+    color: "from-amber-500/30 to-transparent",
+    glowColor: "rgba(245, 158, 11, 0.5)",
+    specs: ["Resource Mapping"],
+    category: "Infrastructure",
+    icon: Shield
   },
   {
-    title: "Internal Tools",
-    description: "Purpose-built software systems designed for efficiency.",
-    component: MockDashboard,
+    title: "System Architecture",
+    description: "Bespoke internal tool ecosystems and automation infrastructure built for specialized business logic.",
+    image: "/integralhq.png",
     className: "md:col-span-1 md:row-span-2",
-    color: "from-emerald-500/10 to-transparent",
+    color: "from-emerald-500/30 to-transparent",
+    glowColor: "rgba(16, 185, 129, 0.5)",
+    specs: ["Auto-Workflows"],
+    category: "Engineering",
+    icon: Zap
   },
+  {
+    title: "Intelligence Module",
+    description: "Custom predictive models and data visualization layers for specialized analytics.",
+    image: "/algopilot.png",
+    className: "md:col-span-2 md:row-span-1",
+    color: "from-pink-500/30 to-transparent",
+    glowColor: "rgba(236, 72, 153, 0.5)",
+    specs: ["Predictive Signals"],
+    category: "AI",
+    icon: Cpu
+  }
 ];
 
 export function BentoGrid() {
   return (
-    <section className="py-64 px-6 bg-[#050505] relative overflow-hidden">
-      <div className="max-w-[1400px] mx-auto">
-        <div className="mb-40 flex flex-col md:flex-row md:items-end justify-between gap-12">
-          <div className="max-w-3xl">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-[10px] uppercase tracking-[0.4em] font-bold text-white/30 mb-6"
-            >
-              Expertise
-            </motion.div>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-5xl md:text-7xl font-bold tracking-tighter text-white leading-[0.9]"
-            >
-              Products Built For <br />
-              <span className="text-white/40">Modern Systems.</span>
-            </motion.h2>
+    <section id="products" className="bg-[#050505] relative overflow-hidden">
+      <LibrarySection />
+      
+      <div className="max-w-[1400px] mx-auto px-6 pb-64">
+        <div className="mb-24">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="w-12 h-px bg-blue-500" />
+            <div className="text-[10px] uppercase tracking-[0.6em] font-bold text-blue-500">
+              Technical Suite
+            </div>
           </div>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-white/40 text-xl font-medium max-w-lg leading-relaxed balance-text"
-          >
-            From internal operational tools to scalable SaaS platforms, Integral Studio develops software systems focused on usability and scalability.
-          </motion.p>
+          <h2 className="text-6xl md:text-9xl font-bold tracking-tighter text-white">
+            Engineered <br />
+            <span className="text-white/20 italic">Artifacts.</span>
+          </h2>
+          <p className="mt-8 text-white/40 text-xl max-w-xl font-medium">
+            A desaturated baseline that renders into full-color, high-fidelity infrastructure on interaction.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {items.map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className={cn(
-                "group relative rounded-[2.5rem] overflow-hidden glass-dark border border-white/5 hover:border-white/20 transition-all duration-700",
-                item.className
-              )}
-            >
-              <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-20 transition-opacity duration-1000 pointer-events-none" />
-              
-              <div className="p-10 h-full flex flex-col">
-                <div className="mb-8">
-                  <h3 className="text-2xl font-bold text-white mb-4 tracking-tight">{item.title}</h3>
-                  <p className="text-white/40 text-sm leading-relaxed max-w-xs">{item.description}</p>
-                </div>
-
-                <div className="flex-1 min-h-[300px] relative mt-auto translate-y-10 group-hover:translate-y-0 transition-transform duration-1000">
-                  <div className={cn(
-                    "absolute -inset-10 bg-gradient-to-br blur-[80px] opacity-10 transition-opacity duration-1000",
-                    item.color
-                  )} />
-                  <div className="relative w-full h-full glass-dark border border-white/10 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-xl">
-                    <item.component className="scale-90 group-hover:scale-95 transition-transform duration-1000" />
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+          {products.map((item, i) => (
+            <BentoItem key={i} item={item} i={i} />
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function BentoItem({ item, i }: { item: any; i: number }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [30, -30]);
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: i * 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      className={cn(
+        "group relative rounded-[3rem] overflow-hidden glass-dark border border-white/5 hover:border-white/20 transition-all duration-700 min-h-[450px] flex flex-col cursor-none",
+        item.className
+      )}
+    >
+      {/* Dynamic Liquid Glow */}
+      <motion.div 
+        animate={{ 
+          opacity: isHovered ? 0.4 : 0,
+          scale: isHovered ? 1.2 : 0.8
+        }}
+        className={cn(
+          "absolute -inset-20 bg-gradient-to-br blur-[120px] pointer-events-none transition-all duration-1000",
+          item.color
+        )} 
+      />
+      
+      <div className="p-12 relative z-10 flex flex-col h-full">
+        <div className="flex justify-between items-start mb-12">
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <item.icon className={cn(
+                "w-4 h-4 transition-colors duration-700",
+                isHovered ? "text-blue-500" : "text-white/20"
+              )} />
+              <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/20">{item.category}</div>
+            </div>
+            <h3 className="text-4xl font-bold text-white tracking-tighter leading-none transition-transform duration-700 group-hover:translate-x-2">
+              {item.title}
+            </h3>
+          </div>
+          <div className="w-14 h-14 rounded-full border border-white/5 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all shadow-xl">
+            <ArrowRight className="w-6 h-6" />
+          </div>
+        </div>
+
+        <p className={cn(
+          "text-base leading-relaxed max-w-[300px] mb-12 transition-colors duration-700",
+          isHovered ? "text-white/60" : "text-white/20"
+        )}>
+          {item.description}
+        </p>
+
+        {/* Feature Tags */}
+        <div className="flex flex-wrap gap-2 mt-auto">
+          {item.specs.map((spec: string) => (
+            <span key={spec} className="px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.03] text-[9px] uppercase tracking-[0.2em] font-bold text-white/40 group-hover:text-white transition-colors">
+              {spec}
+            </span>
+          ))}
+        </div>
+
+        {/* Visual Mock/Image with Grayscale Reveal */}
+        <motion.div 
+          style={{ y }}
+          className="absolute bottom-0 right-0 w-3/4 h-2/3 translate-y-24 group-hover:translate-y-12 transition-transform duration-1000"
+        >
+          <div className="relative w-full h-full glass-dark border-t border-l border-white/10 rounded-tl-[3rem] overflow-hidden shadow-2xl backdrop-blur-3xl group-hover:border-white/30 transition-colors duration-700">
+            {/* Blueprint Grid Overlay (Visible on Hover) */}
+            <motion.div 
+              animate={{ opacity: isHovered ? 0.1 : 0 }}
+              className="absolute inset-0 grid-pattern z-10 pointer-events-none" 
+            />
+            
+            {/* Cinematic Scanner */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.05] to-transparent skew-x-[-20deg] animate-scan pointer-events-none z-20" />
+            
+            <motion.img 
+              animate={{ 
+                filter: isHovered ? "grayscale(0) brightness(1)" : "grayscale(1) brightness(0.6)",
+                scale: isHovered ? 1.05 : 1
+              }}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              src={item.image} 
+              alt={item.title}
+              className="w-full h-full object-cover"
+            />
+
+            {/* Hover Coordinates Decor */}
+            <AnimatePresence>
+              {isHovered && (
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="absolute bottom-6 left-6 z-30 font-mono text-[8px] text-white/40 tracking-widest"
+                >
+                  COORD: 34.05 / -118.24 <br />
+                  VER: 2.0.48_STABLE
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>
   );
 }

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-96 px-6 bg-[#050505] relative overflow-hidden">
+    <section id="about" className="py-48 px-6 bg-[#050505] relative overflow-hidden">
       <div className="max-w-[1400px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 items-start">
           <motion.div

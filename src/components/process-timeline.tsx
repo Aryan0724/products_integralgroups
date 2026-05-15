@@ -1,125 +1,223 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
-import { Search, Map, Layout, Code2, Rocket, TrendingUp } from "lucide-react";
+import { motion, useScroll, useTransform, MotionValue, useSpring } from "framer-motion";
+import { Layers, Cpu, PenTool, Rocket } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const steps = [
+const processSteps = [
   {
-    title: "Research",
-    description: "Understanding the product, users, workflows, and operational requirements.",
-    icon: Search,
+    step: "01",
+    title: "Architecture",
+    description: "We architect the technical blueprint and data structures that will support your product's long-term scale and AI integration.",
+    icon: Layers,
+    color: "from-blue-500/20 to-transparent",
   },
   {
-    title: "Product Strategy",
-    description: "Defining architecture, scalability, product systems, and technical direction.",
-    icon: Map,
+    step: "02",
+    title: "Engineering",
+    description: "Our lead engineers build the core infrastructure, backend systems, and frontend frameworks with production-grade precision.",
+    icon: Cpu,
+    color: "from-purple-500/20 to-transparent",
   },
   {
-    title: "UX & Interface Systems",
-    description: "Designing clean, usable, and scalable user experiences.",
-    icon: Layout,
+    step: "03",
+    title: "Refinement",
+    description: "Every interaction is polished. We fine-tune the UX, optimize performance, and harden security before the final launch.",
+    icon: PenTool,
+    color: "from-emerald-500/20 to-transparent",
   },
   {
-    title: "Development",
-    description: "Building modern frontend systems, backend infrastructure, and automation workflows.",
-    icon: Code2,
-  },
-  {
-    title: "Launch",
-    description: "Deploying stable and production-ready digital systems.",
+    step: "04",
+    title: "Deployment",
+    description: "We scale the product to production, implementing automated CI/CD pipelines and real-time monitoring for total reliability.",
     icon: Rocket,
-  },
-  {
-    title: "Scale",
-    description: "Optimizing infrastructure, workflows, and product systems for long-term scalability.",
-    icon: TrendingUp,
+    color: "from-amber-500/20 to-transparent",
   },
 ];
 
 export function ProcessTimeline() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const targetRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start center", "end center"],
+    target: targetRef,
+    offset: ["start start", "end end"],
   });
 
-  const scaleY = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
+  // Balanced spring for slow, deliberate motion
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 30,
+    damping: 20,
+    restDelta: 0.001
   });
+
+  // Increased range to ensure the 4th milestone is reachable
+  const x = useTransform(smoothProgress, [0, 1], ["0%", "-85%"]);
+  const pathLength = useTransform(smoothProgress, [0, 1], [0, 1]);
 
   return (
-    <section ref={containerRef} className="py-64 px-6 bg-[#050505] relative overflow-hidden">
-      <div className="max-w-[1400px] mx-auto">
-        <div className="text-center mb-48">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-[10px] uppercase tracking-[0.4em] font-bold text-white/30 mb-6"
-          >
-            Methodology
-          </motion.div>
+    <section ref={targetRef} className="relative h-[800vh] bg-black">
+      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
+        {/* Background Decor */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 grid-pattern opacity-[0.03]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[600px] bg-blue-600/5 blur-[180px] rounded-full" />
+        </div>
+
+        {/* Section Header */}
+        <div className="max-w-[1400px] mx-auto px-6 w-full mb-8 relative z-40">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-12 h-px bg-blue-500" />
+            <div className="text-[10px] uppercase tracking-[0.6em] font-bold text-blue-500">
+              Technical Delivery
+            </div>
+          </div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-5xl md:text-7xl font-bold tracking-tighter text-white leading-[0.9]"
+            className="text-6xl md:text-8xl font-bold tracking-tighter text-white"
           >
-            How We <br />
-            <span className="text-white/40">Launch Products.</span>
+            Engineered to <span className="text-white/20 italic">launch.</span>
           </motion.h2>
         </div>
 
-        <div className="relative max-w-4xl mx-auto">
-          {/* Vertical Line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-white/5 -translate-x-1/2" />
-          <motion.div
-            style={{ scaleY, transformOrigin: "top" }}
-            className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-blue-500/0 via-blue-500 to-blue-500/0 -translate-x-1/2 z-10"
-          />
+        {/* Curvilinear Path Container */}
+        <div className="relative w-full h-[600px] z-30">
+          <motion.div 
+            style={{ x }} 
+            className="absolute top-0 left-0 flex items-center h-full w-[5000px]"
+          >
+            <svg
+              viewBox="0 0 5000 600"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-full h-full"
+            >
+              {/* Base Path (Shadow) */}
+              <path
+                d="M0 300C400 300 500 200 1000 200C1500 200 1700 450 2200 450C2700 450 2900 200 3400 200C3900 200 4200 300 5000 300"
+                stroke="white"
+                strokeOpacity="0.05"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeDasharray="12 12"
+              />
+              
+              {/* Animated Progress Path */}
+              <motion.path
+                d="M0 300C400 300 500 200 1000 200C1500 200 1700 450 2200 450C2700 450 2900 200 3400 200C3900 200 4200 300 5000 300"
+                stroke="url(#pathGradient)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                style={{ pathLength }}
+              />
 
-          <div className="space-y-48">
-            {steps.map((step, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                className={cn(
-                  "relative flex items-center gap-24",
-                  i % 2 === 0 ? "flex-row" : "flex-row-reverse"
-                )}
-              >
-                {/* Content */}
-                <div className="flex-1 text-right">
-                  <div className={cn("max-w-md", i % 2 === 0 ? "ml-auto" : "mr-auto text-left")}>
-                    <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/20 mb-4">Step 0{i + 1}</div>
-                    <h3 className="text-3xl font-bold text-white mb-6 tracking-tight">{step.title}</h3>
-                    <p className="text-white/40 leading-relaxed text-lg">{step.description}</p>
-                  </div>
-                </div>
+              <defs>
+                <linearGradient id="pathGradient" x1="0" y1="300" x2="5000" y2="300" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#3B82F6" />
+                  <stop offset="0.33" stopColor="#8B5CF6" />
+                  <stop offset="0.66" stopColor="#EC4899" />
+                  <stop offset="1" stopColor="#3B82F6" />
+                </linearGradient>
+              </defs>
+            </svg>
 
-                {/* Center Node */}
-                <div className="relative z-20 flex-shrink-0">
-                  <div className="w-16 h-16 rounded-2xl glass-dark border border-white/10 flex items-center justify-center bg-[#050505] shadow-2xl group transition-all duration-700">
-                    <step.icon className="w-6 h-6 text-white/40 group-hover:text-white transition-colors duration-700" />
-                  </div>
-                  <div className="absolute inset-0 bg-blue-500/10 blur-2xl rounded-full opacity-0 hover:opacity-100 transition-opacity duration-700" />
-                </div>
-
-                {/* Empty Space for alignment */}
-                <div className="flex-1" />
-              </motion.div>
-            ))}
-          </div>
+            {/* Milestones (Nodes) */}
+            {processSteps.map((step, i) => {
+              const positions = [
+                { x: 1000, y: 200 },
+                { x: 2200, y: 450 },
+                { x: 3400, y: 200 },
+                { x: 4400, y: 300 },
+              ];
+              const pos = positions[i];
+              return (
+                <MilestoneNode 
+                  key={i} 
+                  step={step} 
+                  i={i} 
+                  xPos={pos.x} 
+                  yPos={pos.y} 
+                  scrollYProgress={smoothProgress} 
+                />
+              );
+            })}
+          </motion.div>
         </div>
       </div>
     </section>
+  );
+}
+
+function MilestoneNode({ step, i, xPos, yPos, scrollYProgress }: { step: any; i: number; xPos: number; yPos: number; scrollYProgress: MotionValue<number> }) {
+  // PERFECTED TRIGGER POINTS
+  const triggerPoints = [0.12, 0.4, 0.7, 0.92];
+  const trigger = triggerPoints[i];
+  
+  // Extra wide plateau for long reading time
+  const start = Math.max(0, trigger - 0.18);
+  const peakStart = trigger - 0.08;
+  const peakEnd = trigger + 0.1;
+  const end = Math.min(1, trigger + 0.2);
+  
+  const opacity = useTransform(scrollYProgress, [start, peakStart, peakEnd, end], [0, 1, 1, 0]);
+  const scale = useTransform(scrollYProgress, [start, peakStart, peakEnd, end], [0.7, 1.1, 1.1, 0.7]);
+  const glow = useTransform(scrollYProgress, [start, peakStart, peakEnd, end], [0, 1, 1, 0.2]);
+  const textY = useTransform(scrollYProgress, [start, peakStart], [30, 0]);
+
+  return (
+    <motion.div
+      style={{ 
+        left: xPos, 
+        top: yPos,
+      }}
+      className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center z-30 group"
+    >
+      {/* Background Phase Number - Slightly smaller to avoid overlap */}
+      <motion.div 
+        style={{ opacity: useTransform(opacity, v => v * 0.08) }}
+        className="absolute -top-24 text-[12rem] font-black text-white pointer-events-none select-none tracking-tighter"
+      >
+        {step.step}
+      </motion.div>
+
+      <div className="relative">
+        <div className="w-14 h-14 rounded-full border border-white/10 bg-white/[0.03] flex items-center justify-center pointer-events-none" />
+        
+        <motion.div 
+          style={{ 
+            opacity, 
+            scale,
+            boxShadow: useTransform(glow, v => `0 0 ${v * 80}px rgba(59, 130, 246, 0.6)`)
+          }}
+          className="absolute inset-0 w-14 h-14 rounded-full glass-dark border border-white/50 flex items-center justify-center group-hover:border-white/70 transition-colors duration-700 shadow-2xl"
+        >
+          <step.icon className="w-6 h-6 text-white" />
+        </motion.div>
+      </div>
+
+      <motion.div 
+        style={{ opacity, y: textY }}
+        className={cn(
+          "absolute w-[380px] p-10 rounded-[3rem] glass-dark border border-white/20 flex flex-col gap-4 shadow-2xl backdrop-blur-3xl",
+          yPos < 300 ? "top-20 items-center text-center" : "bottom-20 items-center text-center"
+        )}
+      >
+        <span className="text-[12px] uppercase tracking-[0.8em] font-black text-blue-500 mb-1">
+          {step.step} / PHASE
+        </span>
+        <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tighter leading-none mb-1">
+          {step.title}
+        </h3>
+        <p className="text-white/60 text-base leading-relaxed max-w-[320px] group-hover:text-white/90 transition-colors duration-700">
+          {step.description}
+        </p>
+        
+        <div className="mt-2 px-6 py-2 rounded-full border border-white/10 bg-white/5 inline-flex items-center gap-3 w-fit">
+          <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+          <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Excellence</span>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 }
