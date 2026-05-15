@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence, type MotionValue } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -154,7 +154,15 @@ export function Hero() {
   );
 }
 
-function FloatingSaaSLogos({ scrollYProgress, springX, springY }: { scrollYProgress: any; springX: any; springY: any }) {
+function FloatingSaaSLogos({ 
+  scrollYProgress, 
+  springX, 
+  springY 
+}: { 
+  scrollYProgress: MotionValue<number>; 
+  springX: MotionValue<number>; 
+  springY: MotionValue<number>; 
+}) {
   const radius = useTransform(scrollYProgress, [0, 0.4], [550, 250]);
   const rotation = useTransform(scrollYProgress, [0, 0.5], [0, 360]);
   const globalOpacity = useTransform(scrollYProgress, [0, 0.3, 0.5], [1, 1, 0]);
@@ -166,7 +174,7 @@ function FloatingSaaSLogos({ scrollYProgress, springX, springY }: { scrollYProgr
         const angleOffset = (i / saasLogos.length) * Math.PI * 2;
         
         // Dynamic coordinates with breathing effect
-        const x = useTransform(scrollYProgress, (s) => {
+        const x = useTransform(scrollYProgress, (s: number) => {
           const r = radius.get();
           const rot = rotation.get() * (Math.PI / 180);
           
@@ -178,7 +186,7 @@ function FloatingSaaSLogos({ scrollYProgress, springX, springY }: { scrollYProgr
           return scatterX * (1 - progress) + circleX * progress;
         });
 
-        const y = useTransform(scrollYProgress, (s) => {
+        const y = useTransform(scrollYProgress, (s: number) => {
           const r = radius.get();
           const rot = rotation.get() * (Math.PI / 180);
           
