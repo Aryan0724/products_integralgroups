@@ -49,8 +49,6 @@ export function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
 
-  if (!mounted) return <section className="min-h-screen bg-[#050505]" />;
-
   return (
     <section
       ref={containerRef}
