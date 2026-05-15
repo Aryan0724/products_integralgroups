@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { Magnetic } from "./motion/magnetic";
 
 import { MockDashboard, MockFlow, MockCode } from "./mock-ui";
 

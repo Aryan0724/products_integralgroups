@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence, type MotionValue } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Cpu, Layers, Zap, Database, Shield, TrendingUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Magnetic } from "./motion/magnetic";
 
